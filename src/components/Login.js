@@ -14,8 +14,16 @@ function Login() {
     });
   };
 
+  const resetForm = () => {
+    setValues({
+      username: "",
+      password: "",
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    resetForm();
   };
 
   return (

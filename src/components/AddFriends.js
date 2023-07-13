@@ -7,6 +7,13 @@ const AddFriends = () => {
     friendEmail: "",
   });
 
+  const resetForm = () => {
+    setValues({
+      friendName: "",
+      friendEmail: "",
+    });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -17,6 +24,7 @@ const AddFriends = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    resetForm();
   };
 
   return (
