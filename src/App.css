@@ -9,6 +9,10 @@ body {
   font-family: sans-serif;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -61,9 +65,10 @@ form label {
 }
 
 form input {
-  padding: 1rem 0;
+  padding: 1rem 0.2rem;
   background-color: #040404;
   border: none;
+  color: #fefefe;
 }
 
 form button {
