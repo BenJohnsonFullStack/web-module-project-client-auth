@@ -33,7 +33,7 @@ const AddFriends = () => {
       <form onSubmit={handleSubmit}>
         <div className="input-fields">
           <div className="input-field">
-            <label>FRIEND NAME</label>
+            <label htmlFor="friendName">FRIEND NAME</label>
             <input
               type="text"
               name="friendName"
@@ -43,7 +43,7 @@ const AddFriends = () => {
             ></input>
           </div>
           <div className="input-field">
-            <label>FRIEND EMAIL</label>
+            <label htmlFor="friendEmail">FRIEND EMAIL</label>
             <input
               type="text"
               name="friendEmail"

@@ -9,6 +9,15 @@ body {
   font-family: sans-serif;
 }
 
+li {
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+.error {
+  color: red;
+}
+
 button:hover {
   cursor: pointer;
 }

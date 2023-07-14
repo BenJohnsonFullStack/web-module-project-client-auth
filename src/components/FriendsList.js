@@ -4,7 +4,15 @@ const FriendsList = () => {
   return (
     <>
       <h1>FRIENDS LIST</h1>
-      <div className="friends">{/* map over friends and return */}</div>
+      <div className="friends">
+        <ul>
+          <li>- NAME - EMAIL</li>
+          <li>- NAME - EMAIL</li>
+          <li>- NAME - EMAIL</li>
+          <li>- NAME - EMAIL</li>
+          <li>- NAME - EMAIL</li>
+        </ul>
+      </div>
     </>
   );
 };

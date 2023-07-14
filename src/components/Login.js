@@ -1,53 +1,61 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [values, setValues] = useState({
+  const baseURL = "http://localhost:9000";
+  const navigate = useNavigate();
+
+  const [error, setError] = useState("");
+  const [credential, setCredential] = useState({
     username: "",
     password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
+    setCredential({
+      ...credential,
       [name]: value,
-    });
-  };
-
-  const resetForm = () => {
-    setValues({
-      username: "",
-      password: "",
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    resetForm();
+    axios
+      .post(`${baseURL}/api/login`, credential)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        navigate("/friends");
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   };
 
   return (
     <div className="form-container">
       <h1>LOGIN</h1>
+      <h2 className="error">{error !== "" ? `Error: ${error}` : ""}</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-fields">
           <div className="input-field">
-            <label>USERNAME</label>
+            <label htmlFor="username">USERNAME</label>
             <input
               type="text"
               name="username"
               placeholder="ENTER USERNAME"
-              value={values.username}
+              value={credential.username}
               onChange={handleChange}
             ></input>
           </div>
           <div className="input-field">
-            <label>PASSWORD</label>
+            <label htmlFor="password">PASSWORD</label>
             <input
               type="text"
               name="password"
               placeholder="ENTER PASSWORD"
-              value={values.password}
+              value={credential.password}
               onChange={handleChange}
             ></input>
           </div>
