@@ -6,6 +6,8 @@ import FriendsList from "./components/FriendsList";
 import AddFriends from "./components/AddFriends";
 import NavBar from "./components/NavBar";
 
+const baseURL = "http://localhost:9000";
+
 function App() {
   return (
     <div className="App">
@@ -19,4 +21,5 @@ function App() {
   );
 }
 
+export { baseURL };
 export default App;

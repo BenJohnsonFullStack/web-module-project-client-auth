@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../App";
 
 function Login() {
-  const baseURL = "http://localhost:9000";
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
@@ -30,6 +30,12 @@ function Login() {
       })
       .catch((err) => {
         setError(err.message);
+      })
+      .finally(() => {
+        setCredential({
+          username: "",
+          password: "",
+        });
       });
   };
 

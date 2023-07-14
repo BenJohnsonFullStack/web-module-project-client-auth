@@ -4,12 +4,14 @@ import { useState } from "react";
 const AddFriends = () => {
   const [values, setValues] = useState({
     friendName: "",
+    friendAge: "",
     friendEmail: "",
   });
 
   const resetForm = () => {
     setValues({
       friendName: "",
+      friendAge: "",
       friendEmail: "",
     });
   };
@@ -39,6 +41,16 @@ const AddFriends = () => {
               name="friendName"
               placeholder="ENTER NAME"
               value={values.friendName}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="input-field">
+            <label htmlFor="friendAge">FRIEND AGE</label>
+            <input
+              type="text"
+              name="friendAge"
+              placeholder="ENTER AGE"
+              value={values.friendAge}
               onChange={handleChange}
             ></input>
           </div>
