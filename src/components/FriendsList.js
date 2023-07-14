@@ -4,7 +4,7 @@ import { baseURL } from "../App";
 
 const FriendsList = () => {
   const [friends, setFriends] = useState([]);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -18,14 +18,14 @@ const FriendsList = () => {
         setFriends(res.data);
       })
       .catch((err) => {
-        setError(err.message);
+        setErrorMessage(err.response.data.error);
       });
   }, []);
 
   return (
     <>
       <h1>FRIENDS LIST</h1>
-      <h2 className="error">{error !== "" ? `Error: ${error}` : ""}</h2>
+      <h2 className="error">{errorMessage !== "" ? errorMessage : ""}</h2>
       <div className="friends">
         <ul>
           {friends.map((friend) => {

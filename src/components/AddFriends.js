@@ -1,18 +1,22 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { baseURL } from "../App";
 
 const AddFriends = () => {
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
   const [values, setValues] = useState({
-    friendName: "",
-    friendAge: "",
-    friendEmail: "",
+    name: "",
+    age: "",
+    email: "",
   });
 
   const resetForm = () => {
     setValues({
-      friendName: "",
-      friendAge: "",
-      friendEmail: "",
+      name: "",
+      age: "",
+      email: "",
     });
   };
 
@@ -25,42 +29,64 @@ const AddFriends = () => {
   };
 
   const handleSubmit = (e) => {
+    const token = localStorage.getItem("token");
+    const newFriend = {
+      id: Date.now(),
+      name: values.name,
+      age: values.age,
+      email: values.email,
+    };
     e.preventDefault();
-    resetForm();
+    axios
+      .post(`${baseURL}/api/friends`, newFriend, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then(() => {
+        navigate("/friends");
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data.error);
+      })
+      .finally(() => {
+        resetForm();
+      });
   };
 
   return (
     <div className="form-container">
       <h1>ADD FRIEND</h1>
+      <h2 className="error">{errorMessage !== "" ? errorMessage : ""}</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-fields">
           <div className="input-field">
-            <label htmlFor="friendName">FRIEND NAME</label>
+            <label htmlFor="name">FRIEND NAME</label>
             <input
               type="text"
-              name="friendName"
+              name="name"
               placeholder="ENTER NAME"
-              value={values.friendName}
+              value={values.name}
               onChange={handleChange}
             ></input>
           </div>
           <div className="input-field">
-            <label htmlFor="friendAge">FRIEND AGE</label>
+            <label htmlFor="age">FRIEND AGE</label>
             <input
               type="text"
-              name="friendAge"
+              name="age"
               placeholder="ENTER AGE"
-              value={values.friendAge}
+              value={values.age}
               onChange={handleChange}
             ></input>
           </div>
           <div className="input-field">
-            <label htmlFor="friendEmail">FRIEND EMAIL</label>
+            <label htmlFor="email">FRIEND EMAIL</label>
             <input
               type="text"
-              name="friendEmail"
+              name="email"
               placeholder="ENTER EMAIL"
-              value={values.friendEmail}
+              value={values.email}
               onChange={handleChange}
             ></input>
           </div>
