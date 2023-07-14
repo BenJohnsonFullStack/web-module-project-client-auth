@@ -6,8 +6,7 @@ import FriendsList from "./components/FriendsList";
 import AddFriends from "./components/AddFriends";
 import NavBar from "./components/NavBar";
 import Logout from "./components/Logout";
-
-const baseURL = "http://localhost:9000";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -15,13 +14,36 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Login />} />
-        <Route exact path="/friends" element={<FriendsList />} />
-        <Route exact path="/friends/add" element={<AddFriends />} />
-        <Route exact path="/logout" element={<Logout />} />
+        <Route
+          exact
+          path="/friends"
+          element={
+            <PrivateRoute>
+              <FriendsList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/friends/add"
+          element={
+            <PrivateRoute>
+              <AddFriends />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/logout"
+          element={
+            <PrivateRoute>
+              <Logout />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
 }
 
-export { baseURL };
 export default App;

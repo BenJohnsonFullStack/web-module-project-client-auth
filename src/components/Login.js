@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { baseURL } from "../App";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,14 +21,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${baseURL}/api/login`, credential)
+    axiosWithAuth()
+      .post("/login", credential)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         navigate("/friends");
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.response.data.error);
       })
       .finally(() => {
         setCredential({
@@ -42,7 +41,7 @@ function Login() {
   return (
     <div className="form-container">
       <h1>LOGIN</h1>
-      <h2 className="error">{error !== "" ? `Error: ${error}` : ""}</h2>
+      <h2 className="error">{error !== "" ? error : ""}</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-fields">
           <div className="input-field">

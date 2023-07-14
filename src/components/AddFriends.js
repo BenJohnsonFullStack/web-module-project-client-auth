@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosWithAuth from "../utils/axiosWithAuth";
 import { useNavigate } from "react-router-dom";
-import { baseURL } from "../App";
 
 const AddFriends = () => {
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ const AddFriends = () => {
   };
 
   const handleSubmit = (e) => {
-    const token = localStorage.getItem("token");
     const newFriend = {
       id: Date.now(),
       name: values.name,
@@ -37,12 +35,8 @@ const AddFriends = () => {
       email: values.email,
     };
     e.preventDefault();
-    axios
-      .post(`${baseURL}/api/friends`, newFriend, {
-        headers: {
-          authorization: token,
-        },
-      })
+    axiosWithAuth()
+      .post("/friends", newFriend)
       .then(() => {
         navigate("/friends");
       })
