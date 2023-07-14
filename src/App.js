@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import FriendsList from "./components/FriendsList";
 import AddFriends from "./components/AddFriends";
 import NavBar from "./components/NavBar";
+import Logout from "./components/Logout";
 
 const baseURL = "http://localhost:9000";
 
@@ -13,9 +14,10 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/friends" element={<FriendsList />} />
-        <Route path="/friends/add" element={<AddFriends />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/friends" element={<FriendsList />} />
+        <Route exact path="/friends/add" element={<AddFriends />} />
+        <Route exact path="/logout" element={<Logout />} />
       </Routes>
     </div>
   );
