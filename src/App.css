@@ -35,6 +35,12 @@ h2 {
   padding: 1.5em 1em;
 }
 
+.spacer {
+  background-color: #040404;
+  height: 0.2em;
+  margin-top: 0.5em;
+}
+
 h1 {
   font-size: 3.5rem;
 }
